@@ -1,9 +1,14 @@
-let todoContext;
+let todoContnt;
 let Elmoverlay;
 let ElmAddBox;
+let ElmAddtodoBtn;
+let newTodo;
+let todoCloseIcone;
+let ElemTodo;
 addToDoBtn = document.getElementById("add_btn")
 ElmAddTxtBox = document.getElementById("todo_input")
 closeAddtodoBox = document.getElementsByClassName("btn close-modal")
+ElmStatusClm = document.getElementById("no_status")
 
 addToDoBtn.addEventListener('click' , function addnewtodo(){
     Elmoverlay = addToDoBtn.appendChild(overlay)
@@ -18,6 +23,7 @@ ElmAddTxtBox.addEventListener('click' , function addtext(){
     console.log("hi")
 })
 
+//close icone in add todo box
 function closebox(){
     console.log("closeAddtodoBox");
     console.log("closeAddtodoBox");
@@ -25,5 +31,23 @@ function closebox(){
     addToDoBtn.removeChild(Elmoverlay)
     //  ElmAddBox.remove()
     //  Elmoverlay.remove()
-    //addToDoBtn.removeEventListener('click' , addnewtodo)
 }
+
+//add todo button in add todo box
+ElmAddtodoBtn = document.getElementById("todo_submit")
+ElmAddtodoBtn.addEventListener('click' , function addtodo(){
+    console.log("click add")
+    todoContnt = ElmAddTxtBox.value;
+    newTodo = document.createElement('div')
+    newTodo.setAttribute('class','todo')
+    newTodo.setAttribute('draggable','true')
+    newTodo.innerHTML = todoContnt
+    todoCloseIcone = document.createElement('span')
+    todoCloseIcone.setAttribute('class','close')
+    todoCloseIcone.innerHTML= '&times;'
+    newTodo.append(todoCloseIcone)
+    ElmStatusClm.append(newTodo)
+    addToDoBtn.removeChild(ElmAddBox)
+    addToDoBtn.removeChild(Elmoverlay)
+    console.log(todoContnt)
+})
