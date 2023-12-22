@@ -1,25 +1,28 @@
+
 let todoContnt;
-let Elmoverlay;
-let ElmAddBox;
-let ElmAddtodoBtn;
+let elmoverlay;
+let elmAddBox;
+let elmAddtodoBtn;
 let newTodo;
 let todoCloseIcone;
-let ElemTodo;
-addToDoBtn = document.getElementById("add_btn")
-ElmAddTxtBox = document.getElementById("todo_input")
-closeAddtodoBox = document.getElementsByClassName("btn close-modal")
-ElmStatusClm = document.getElementById("no_status")
+let elemTodo;
+let elemTarget;
+let addToDoBtn = document.getElementById("add_btn")
+let elmAddTxtBox = document.getElementById("todo_input")
+let closeAddtodoBox = document.getElementsByClassName("btn close-modal")
+let elmStatusClum = document.getElementById("no_status")
+let elmNotStartClum = document.getElementById("notStart")
+let elmModal = document.getElementById("todo_form")
+let elmOverlay = document.getElementById("overlay")
 
 addToDoBtn.addEventListener('click' , function addnewtodo(){
-    Elmoverlay = addToDoBtn.appendChild(overlay)
-    Elmoverlay.style.display = 'block'
-    ElmAddBox = addToDoBtn.appendChild(todo_form)
-    ElmAddBox.style.top = '22%'
-    ElmAddTxtBox.value = "";
+    elmOverlay.setAttribute('class','active')
+    elmModal.setAttribute('class','active')
+    elmAddTxtBox.value = "";
 })
 
-ElmAddTxtBox.addEventListener('click' , function addtext(){
-    ElmAddTxtBox.setAttribute('autofocus','')
+elmAddTxtBox.addEventListener('click' , function addtext(){
+    elmAddTxtBox.setAttribute('autofocus','')
     console.log("hi")
 })
 
@@ -27,17 +30,20 @@ ElmAddTxtBox.addEventListener('click' , function addtext(){
 function closebox(){
     console.log("closeAddtodoBox");
     console.log("closeAddtodoBox");
-    addToDoBtn.removeChild(ElmAddBox)
-    addToDoBtn.removeChild(Elmoverlay)
-    //  ElmAddBox.remove()
-    //  Elmoverlay.remove()
+    elmModal.removeAttribute('class')
+    elmOverlay.removeAttribute('class')
+    elmModal.setAttribute('class','modal')
+    // addToDoBtn.removeChild(elmAddBox)
+    // addToDoBtn.removeChild(elmoverlay)
+    //  elmAddBox.remove()
+    //  elmoverlay.remove()
 }
 
 //add todo button in add todo box
-ElmAddtodoBtn = document.getElementById("todo_submit")
-ElmAddtodoBtn.addEventListener('click' , function addtodo(){
+elmAddtodoBtn = document.getElementById("todo_submit")
+elmAddtodoBtn.addEventListener('click' , function addtodo(){
     console.log("click add")
-    todoContnt = ElmAddTxtBox.value;
+    todoContnt = elmAddTxtBox.value;
     newTodo = document.createElement('div')
     newTodo.setAttribute('class','todo')
     newTodo.setAttribute('draggable','true')
@@ -46,8 +52,29 @@ ElmAddtodoBtn.addEventListener('click' , function addtodo(){
     todoCloseIcone.setAttribute('class','close')
     todoCloseIcone.innerHTML= '&times;'
     newTodo.append(todoCloseIcone)
-    ElmStatusClm.append(newTodo)
-    addToDoBtn.removeChild(ElmAddBox)
-    addToDoBtn.removeChild(Elmoverlay)
+    elmStatusClum.append(newTodo)
+    elmModal.removeAttribute('class','active')
+    elmOverlay.removeAttribute('class','active')
+    elmModal.setAttribute('class','modal')
     console.log(todoContnt)
 })
+
+function dragdstart(event){
+    console.log("drag") 
+    event.dataTransfer.setData('elem',event.target.id)
+}
+
+function dropHander(event){
+    console.log("on drop : no status")
+    let TargetId = event.dataTransfer.getData('elem')
+    console.log(TargetId)
+    elemTarget = document.getElementById(TargetId)
+    console.log(ElmTarget)
+    //event.target.append(ElmTarget)
+}
+
+function dragoverHandler(event){
+    console.log("on drop over")
+    event.preventDefault()
+}
+

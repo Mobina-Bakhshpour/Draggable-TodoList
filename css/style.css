@@ -103,7 +103,7 @@ body {
 }
 
 .modal.active {
-  top: 15%;
+  top: 22%;
 }
 
 .modal .header {
@@ -145,4 +145,9 @@ body {
   color: #f3f3f3;
   font-size: 1.25rem;
   border: none;
+}
+#todo_form{
+  z-index: 3;
+  position: absolute;
+
 }
