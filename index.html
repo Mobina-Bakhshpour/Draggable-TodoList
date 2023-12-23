@@ -24,7 +24,7 @@
     </div>
     <!-- todo -->
     <div class="todo-container">
-      <div class="status" id="no_status">
+      <div class="status" id="no_status" ondrop="dropHander(event)" ondragover="dragoverHandler(event)">
         <h1>No Status</h1>
         <button id="add_btn" data-target-modal="#todo_form">+ Add Todo</button>
         <div id="1B" class="todo"  draggable="true" ondragstart="dragdstart(event)">
@@ -35,10 +35,10 @@
       <div class="status" id="notStart" ondrop="dropHander(event)" ondragover="dragoverHandler(event)">
         <h1>Not Started</h1>
       </div>
-      <div class="status">
+      <div class="status" ondrop="dropHander(event)" ondragover="dragoverHandler(event)">
         <h1>In Progress</h1>
       </div>
-      <div class="status">
+      <div class="status" ondrop="dropHander(event)" ondragover="dragoverHandler(event)">
         <h1>Completed</h1>
       </div>
     </div>

@@ -6,7 +6,7 @@ let elmAddtodoBtn;
 let newTodo;
 let todoCloseIcone;
 let elemTodo;
-let elemTarget;
+let elmTarget;
 let addToDoBtn = document.getElementById("add_btn")
 let elmAddTxtBox = document.getElementById("todo_input")
 let closeAddtodoBox = document.getElementsByClassName("btn close-modal")
@@ -33,20 +33,19 @@ function closebox(){
     elmModal.removeAttribute('class')
     elmOverlay.removeAttribute('class')
     elmModal.setAttribute('class','modal')
-    // addToDoBtn.removeChild(elmAddBox)
-    // addToDoBtn.removeChild(elmoverlay)
-    //  elmAddBox.remove()
-    //  elmoverlay.remove()
 }
 
 //add todo button in add todo box
 elmAddtodoBtn = document.getElementById("todo_submit")
-elmAddtodoBtn.addEventListener('click' , function addtodo(){
-    console.log("click add")
+elmAddtodoBtn.addEventListener('click' , function addtodo(event){
     todoContnt = elmAddTxtBox.value;
     newTodo = document.createElement('div')
     newTodo.setAttribute('class','todo')
     newTodo.setAttribute('draggable','true')
+    newTodo.setAttribute('id', '1C')
+    newTodo.addEventListener('dragstart',function dragdstart(event) {
+        event.dataTransfer.setData('elem',event.target.id)
+    })
     newTodo.innerHTML = todoContnt
     todoCloseIcone = document.createElement('span')
     todoCloseIcone.setAttribute('class','close')
@@ -59,18 +58,19 @@ elmAddtodoBtn.addEventListener('click' , function addtodo(){
     console.log(todoContnt)
 })
 
+
 function dragdstart(event){
     console.log("drag") 
     event.dataTransfer.setData('elem',event.target.id)
 }
 
 function dropHander(event){
-    console.log("on drop : no status")
+    // console.log("on drop : no status")
     let TargetId = event.dataTransfer.getData('elem')
-    console.log(TargetId)
-    elemTarget = document.getElementById(TargetId)
-    console.log(ElmTarget)
-    //event.target.append(ElmTarget)
+    // console.log(TargetId)
+    elmTarget = document.getElementById(TargetId)
+    // console.log(elmTarget)
+    event.target.append(elmTarget)
 }
 
 function dragoverHandler(event){
@@ -78,3 +78,9 @@ function dragoverHandler(event){
     event.preventDefault()
 }
 
+//function close Div todo
+let closeSpan = document.querySelector(".close")
+let parentClose = closeSpan.closest(".todo")
+closeSpan.addEventListener('click',function rmDiv(){
+    parentClose.remove()
+})
