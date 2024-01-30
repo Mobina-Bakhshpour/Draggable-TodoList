@@ -79,8 +79,11 @@ function dragoverHandler(event){
 }
 
 //function close Div todo
-let closeSpan = document.querySelector(".close")
-let parentClose = closeSpan.closest(".todo")
-closeSpan.addEventListener('click',function rmDiv(){
-    parentClose.remove()
-})
+document.addEventListener('click', function (event) {
+    if (event.target.classList.contains('close')) {
+        const todoToRemove = event.target.closest('.todo');
+        if (todoToRemove) {
+            todoToRemove.remove();
+        }
+    }
+});
